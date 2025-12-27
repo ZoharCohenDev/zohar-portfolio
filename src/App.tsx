@@ -31,26 +31,15 @@ export default function App() {
     };
   }, []);
 
-  const LINKEDIN_URL = "https://www.linkedin.com/in/YOUR_LINK_HERE";
-  const GITHUB_URL = "https://github.com/YOUR_USERNAME";
-  const YOUR_EMAIL = "your.email@gmail.com";
+  const LINKEDIN_URL = "https://www.linkedin.com/in/zohar-cohen-b9832b271/";
+  const GITHUB_URL = "https://github.com/ZoharCohenDev";
+  const YOUR_EMAIL = "matancz99@gmail.com";
 
   const mailSubject = "Portfolio — Zohar Cohen";
   const mailBody = "Hi Zohar,\n\nI visited your portfolio and I’d love to connect.\n\nMy name:\nCompany:\nRole:\n\nBest,\n";
 
   const mailtoHref = `mailto:${YOUR_EMAIL}?subject=${enc(mailSubject)}&body=${enc(mailBody)}`;
   const gmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${enc(YOUR_EMAIL)}&su=${enc(mailSubject)}&body=${enc(mailBody)}`;
-
-  // const [experienceStory, setExperienceStory] = useState(
-  //   "Smarketing started as a product idea: build a simple, powerful way to create campaigns and landing pages quickly.\n\nWe developed the platform end-to-end and pushed it forward as a real product. After making strong progress, we went out to seek investment and even appeared on a sharks-style investor TV program.\n\nMy focus was full-stack delivery: designing the UI, building core flows, connecting the backend, and making everything feel fast, clean, and reliable."
-  // );
-
-  // const [smarketingLogo, setSmarketingLogo] = useState<string | undefined>(undefined);
-  // const setSmarketingLogoFile = (file?: File) => {
-  //   if (!file) return;
-  //   const url = URL.createObjectURL(file);
-  //   setSmarketingLogo(url);
-  // };
 
   const [projects, setProjects] = useState<Project[]>(INITIAL_PROJECTS);
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
