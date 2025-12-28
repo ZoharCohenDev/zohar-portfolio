@@ -1,14 +1,71 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Modal from "../components/Modal";
 import { scrollToId } from "../utils/scroll";
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const calc = () => setIsMobile(window.matchMedia("(max-width: 820px)").matches);
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
+  return isMobile;
+}
+
+function PdfModal({
+  open,
+  title,
+  src,
+  onClose,
+}: {
+  open: boolean;
+  title: string;
+  src: string;
+  onClose: () => void;
+}) {
+  const isMobile = useIsMobile();
+
+  return (
+    <Modal open={open} title={title} onClose={onClose}>
+      <div className="cvModalBody">
+        {!isMobile ? (
+          <iframe className="cvFrame" src={src} title={title} />
+        ) : (
+          <div className="pdfMobileCard">
+
+            <div className="pdfMobileBtns">
+              <a className="btn" href={src} target="_blank" rel="noreferrer">
+                Open full screen
+              </a>
+              <a className="btn ghost" href={src} download>
+                Download PDF
+              </a>
+            </div>
+          </div>
+        )}
+
+        {/* <div className="cvActions">
+          <a className="btn ghost" href={src} target="_blank" rel="noreferrer">
+            Open in new tab
+          </a>
+          <a className="btn" href={src} download>
+            Download PDF
+          </a>
+        </div> */}
+      </div>
+    </Modal>
+  );
+}
+
 export default function Hero({ gmailHref }: { gmailHref: string }) {
   const [cvOpen, setCvOpen] = useState(false);
-  const cvSrc = "/ZoharCV.pdf";
   const [gradeSheetOpen, setGradeSheetOpen] = useState(false);
-  const gradeSheetSrc = "/GradeSheet.pdf";
-  // const linkedinHref = "https://www.linkedin.com/in/zohar-cohen-b9832b271/";
-  // const githubHref = "https://github.com/ZoharCohenDev";
+
+  const cvSrc = useMemo(() => "/ZoharCV.pdf", []);
+  const gradeSheetSrc = useMemo(() => "/GradeSheet.pdf", []);
 
   return (
     <>
@@ -33,9 +90,9 @@ export default function Hero({ gmailHref }: { gmailHref: string }) {
             </h1>
 
             <p className="heroLead">
-              Software is easy to write. <br/>
-              Good software is harder.<br/>
-              That’s the part I care about and continue to specialize in.<br/>
+              Software is easy to write. <br />
+              Good software is harder.<br />
+              That’s the part I care about and continue to specialize in.<br />
               Computer Science B.Sc. graduate, M.Sc. student.
             </p>
 
@@ -52,19 +109,10 @@ export default function Hero({ gmailHref }: { gmailHref: string }) {
                 Grade Sheet
               </button>
 
-              {/* <a className="btn ghost" href={linkedinHref} target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-
-              <a className="btn ghost" href={githubHref} target="_blank" rel="noreferrer">
-                GitHub
-              </a> */}
-
               <a className="btn ghost" href={gmailHref} target="_blank" rel="noreferrer">
                 Send Email
               </a>
             </div>
-
 
             <div className="heroMini">
               <div className="miniCard">
@@ -96,7 +144,9 @@ export default function Hero({ gmailHref }: { gmailHref: string }) {
               <div className="scan" />
               <div className="rightText">
                 <div className="rtTitle">Portfolio Showcase</div>
-                <div className="rtSub">Projects, experience, and my tech stack, built with clean design and smooth interactions.</div>
+                <div className="rtSub">
+                  Projects, experience, and my tech stack, built with clean design and smooth interactions.
+                </div>
               </div>
               <div className="rightGlow" />
             </div>
@@ -111,33 +161,13 @@ export default function Hero({ gmailHref }: { gmailHref: string }) {
         </div>
       </section>
 
-      <Modal open={cvOpen} title="Resume" onClose={() => setCvOpen(false)}>
-        <div className="cvModalBody">
-          <iframe className="cvFrame" src={cvSrc} title="CV" />
-          <div className="cvActions">
-            <a className="btn ghost" href={cvSrc} target="_blank" rel="noreferrer">
-              Open in new tab
-            </a>
-            <a className="btn" href={cvSrc} download>
-              Download PDF
-            </a>
-          </div>
-        </div>
-      </Modal>
-
-      <Modal open={gradeSheetOpen} title="Grade Sheet" onClose={() => setGradeSheetOpen(false)}>
-        <div className="cvModalBody">
-          <iframe className="cvFrame" src={gradeSheetSrc} title="Grade Sheet" />
-          <div className="cvActions">
-            <a className="btn ghost" href={gradeSheetSrc} target="_blank" rel="noreferrer">
-              Open in new tab
-            </a>
-            <a className="btn" href={gradeSheetSrc} download>
-              Download PDF
-            </a>
-          </div>
-        </div>
-      </Modal>
+      <PdfModal open={cvOpen} title="Resume" src={cvSrc} onClose={() => setCvOpen(false)} />
+      <PdfModal
+        open={gradeSheetOpen}
+        title="Grade Sheet"
+        src={gradeSheetSrc}
+        onClose={() => setGradeSheetOpen(false)}
+      />
     </>
   );
 }

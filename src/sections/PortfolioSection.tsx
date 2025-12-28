@@ -3,6 +3,12 @@ import type { Project, Skill, ActiveTab } from "../types/portfolio";
 import TabSwitch from "../components/TabSwitch";
 import SkillTile from "../components/SkillTile";
 import ProjectCard from "../components/ProjectCard";
+import landingPageImg from "../assets/SmarketingPics/landing-page.png";
+import registerImg from "../assets/SmarketingPics/Register.png";
+import createCampaignImg from "../assets/SmarketingPics/createCampaign.png";
+import buildLPImg from "../assets/SmarketingPics/buildLP.png";
+import analyticsImg from "../assets/SmarketingPics/analythics.png";
+import lpImg from "../assets/SmarketingPics/LP.png";
 
 import smarketingImg from "../assets/projectsLogo/Smarketing.png";
 
@@ -51,40 +57,40 @@ export default function PortfolioSection({
 
   const flowItems: ExperienceFlowItem[] = [
     {
-      title: "Step 0 — Product landing page",
+      title: "Product landing page",
       text:
         "The journey starts with a public marketing landing page that introduces Smarketing as a product. It explains the value, shows the core capabilities, and drives users to sign up. This page was designed to convert visitors into active users.",
-      image: "/src/assets/SmarketingPics/landing-page.png",
+      image: landingPageImg,
     },
     {
-      title: "Step 1 — Campaign & business inputs",
+      title: "Campaign & business inputs",
       text:
         "After signing up, users define their campaign goals, target audience, and business details. These inputs are structured and validated to serve as the foundation for all generated content. Every later decision in the system is based on this data.",
-      image: "/src/assets/SmarketingPics/Register.png",
+      image: registerImg,
     },
     {
-      title: "Step 2 — Content generation & tone control",
+      title: "Content generation & tone control",
       text:
         "Based on the campaign purpose and selected marketing tone, the system generates copy for each landing page section. Users can tweak wording, regenerate content, and adjust tone without breaking structure. This keeps content flexible but controlled.",
-      image: "/src/assets/SmarketingPics/createCampaign.png",
+      image: createCampaignImg,
     },
     {
-      title: "Step 3 — Layout templates & design system",
+      title: "Layout templates & design system",
       text:
         "Generated content is mapped into responsive layout templates built on a shared design system. Colors, typography, spacing, and components stay consistent across pages. This allows fast generation without sacrificing visual quality.",
-      image: "/src/assets/SmarketingPics/buildLP.png",
+      image: buildLPImg,
     },
     {
-      title: "Step 4 — Landing page analytics",
+      title: "Landing page analytics",
       text:
         "Once the landing page is live, the system tracks performance and engagement metrics. These insights help users understand how their campaign performs and where improvements are needed. Analytics close the loop between content and results.",
-      image: "/src/assets/SmarketingPics/analythics.png",
+      image: analyticsImg,
     },
     {
-      title: "Step 5 — Preview, edit, and iterate",
+      title: "Preview, edit, and iterate",
       text:
         "Users can preview the full landing page, reorder sections, replace images, and fine-tune text. The builder prevents layout-breaking changes while keeping iteration fast. This makes continuous improvement simple and safe.",
-      image: "/src/assets/SmarketingPics/LP.png",
+      image: lpImg,
     },
   ];
 

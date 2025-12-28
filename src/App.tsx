@@ -81,6 +81,10 @@ export default function App() {
     setTransitionKey((k) => k + 1);
   };
 
+  const waPhone = "972526402708";
+  const waText = "Hi Zohar, I came from your portfolio and I’d love to connect.";
+  const whatsappHref = `https://wa.me/${waPhone}?text=${encodeURIComponent(waText)}`;
+
   return (
     <div className="page">
       {showSplash ? <Splash hide={hideSplash} /> : null}
@@ -109,6 +113,18 @@ export default function App() {
         onSetStep={(idx, patch) => setProjectStep(currentProject?.id ?? "", idx, patch)}
         onSetStepImage={(idx, file) => setProjectStepImage(currentProject?.id ?? "", idx, file)}
       />
+
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noreferrer"
+        className="whatsappFloat"
+        aria-label="Chat on WhatsApp"
+      >
+        <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor" aria-hidden="true">
+          <path d="M16.02 3C9.38 3 4 8.38 4 15.02c0 2.64.86 5.08 2.32 7.06L5 29l7.1-1.86a12.93 12.93 0 0 0 3.92.6c6.64 0 12.02-5.38 12.02-12.02C28.04 8.38 22.66 3 16.02 3zm0 22.1c-1.26 0-2.5-.24-3.66-.7l-.26-.1-4.22 1.1 1.12-4.1-.18-.26a9.06 9.06 0 1 1 7.2 4.06zm5.26-6.9c-.28-.14-1.66-.82-1.92-.92-.26-.1-.46-.14-.66.14-.2.28-.76.92-.94 1.1-.18.18-.36.2-.64.06-.28-.14-1.2-.44-2.28-1.4-.84-.74-1.4-1.66-1.56-1.94-.16-.28-.02-.44.12-.58.12-.12.28-.3.42-.46.14-.16.18-.28.28-.46.1-.18.06-.34-.02-.48-.08-.14-.66-1.6-.9-2.2-.24-.58-.48-.5-.66-.5h-.56c-.18 0-.48.06-.74.34-.26.28-.98.96-.98 2.34 0 1.38 1 2.72 1.14 2.9.14.18 1.98 3.02 4.8 4.24.66.28 1.18.44 1.58.56.66.2 1.26.18 1.74.1.54-.08 1.66-.68 1.9-1.34.24-.66.24-1.22.18-1.34-.06-.12-.26-.18-.54-.32z" />
+        </svg>
+      </a>
     </div>
   );
 }
