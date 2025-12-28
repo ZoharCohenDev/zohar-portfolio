@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import type { Project } from "../types/portfolio";
 
@@ -13,6 +14,23 @@ export default function ProjectWalkthroughModal({
   onSetStep: (idx: number, patch: { title?: string; text?: string }) => void;
   onSetStepImage: (idx: number, file?: File) => void;
 }) {
+  const [openImage, setOpenImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!openImage) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenImage(null);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [openImage]);
+
+  useEffect(() => {
+    if (!project) setOpenImage(null);
+  }, [project]);
+
   return (
     <Modal open={!!project} title={project ? `${project.name} walkthrough` : ""} onClose={onClose}>
       {project ? (
@@ -35,7 +53,6 @@ export default function ProjectWalkthroughModal({
               />
             </svg>
 
-
             <div className="steps">
               {project.steps.map((s, idx) => {
                 const align = idx % 2 === 0 ? "left" : "right";
@@ -50,7 +67,12 @@ export default function ProjectWalkthroughModal({
                       <div className="stepBody">
                         <div className="stepImgWrap">
                           {s.image ? (
-                            <img className="stepImg" src={s.image} alt={s.title} />
+                            <img
+                              className="stepImg clickable"
+                              src={s.image}
+                              alt={s.title}
+                              onClick={() => setOpenImage(s.image!)}
+                            />
                           ) : (
                             <div className="stepImgFallback">Upload screenshot</div>
                           )}
@@ -66,6 +88,17 @@ export default function ProjectWalkthroughModal({
           </div>
         </div>
       ) : null}
+
+      {openImage && (
+        <div className="imageOverlay" onClick={() => setOpenImage(null)}>
+          <img
+            src={openImage}
+            alt="Preview"
+            className="imageOverlayImg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </Modal>
   );
 }
