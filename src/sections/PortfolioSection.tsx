@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { Project, Skill, ActiveTab } from "../types/portfolio";
 import TabSwitch from "../components/TabSwitch";
 import SkillTile from "../components/SkillTile";
@@ -30,6 +31,19 @@ export default function PortfolioSection({
   onSetProjectLogo: (projectId: string, file?: File) => void;
   onSetProjectGithub: (projectId: string, url: string) => void;
 }) {
+  const [openImage, setOpenImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!openImage) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenImage(null);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [openImage]);
+
   const experienceIntro =
     "I worked as a Full Stack Developer at Smarketing, a venture founded by five entrepreneurs as part of a college project that we decided to take all the way to a real product.\n\n" +
     "We didn’t treat it like a “demo” - we built an end to end marketing platform focused on helping businesses create campaigns and generate high-converting landing pages quickly. As the product matured, we pushed it forward beyond the academic scope, validated the direction with real feedback, and presented the venture on an investor TV show (sharks Tank) as part of our funding and growth efforts.\n\n" +
@@ -37,24 +51,40 @@ export default function PortfolioSection({
 
   const flowItems: ExperienceFlowItem[] = [
     {
+      title: "Step 0 — Product landing page",
+      text:
+        "The journey starts with a public marketing landing page that introduces Smarketing as a product. It explains the value, shows the core capabilities, and drives users to sign up. This page was designed to convert visitors into active users.",
+      image: "/src/assets/SmarketingPics/landing-page.png",
+    },
+    {
       title: "Step 1 — Campaign & business inputs",
-      text: "The process starts when a user defines the campaign goal, audience, and business details. These inputs become the structured foundation for all generated content and layout decisions.",
+      text:
+        "After signing up, users define their campaign goals, target audience, and business details. These inputs are structured and validated to serve as the foundation for all generated content. Every later decision in the system is based on this data.",
+      image: "/src/assets/SmarketingPics/Register.png",
     },
     {
       title: "Step 2 — Content generation & tone control",
-      text: "Based on the marketing tone and campaign purpose, the system generates section copy that matches the style and intent - then allows refinement and iteration.",
+      text:
+        "Based on the campaign purpose and selected marketing tone, the system generates copy for each landing page section. Users can tweak wording, regenerate content, and adjust tone without breaking structure. This keeps content flexible but controlled.",
+      image: "/src/assets/SmarketingPics/createCampaign.png",
     },
     {
-      title: "Step 3 — Layout templates + design system",
-      text: "The platform maps content into reusable, responsive templates. Colors, typography, spacing, and component styling stay consistent through a shared design system.",
+      title: "Step 3 — Layout templates & design system",
+      text:
+        "Generated content is mapped into responsive layout templates built on a shared design system. Colors, typography, spacing, and components stay consistent across pages. This allows fast generation without sacrificing visual quality.",
+      image: "/src/assets/SmarketingPics/buildLP.png",
     },
     {
-      title: "Step 4 — Landing page assembly",
-      text: "All sections are assembled into a complete page: hero, features, reviews, gallery, and contact. The output is a full landing page, ready to preview and publish.",
+      title: "Step 4 — Landing page analytics",
+      text:
+        "Once the landing page is live, the system tracks performance and engagement metrics. These insights help users understand how their campaign performs and where improvements are needed. Analytics close the loop between content and results.",
+      image: "/src/assets/SmarketingPics/analythics.png",
     },
     {
       title: "Step 5 — Preview, edit, and iterate",
-      text: "Users can reorder sections, edit text, swap visuals, and adjust styles. The builder keeps the experience fast and prevents breaking the layout.",
+      text:
+        "Users can preview the full landing page, reorder sections, replace images, and fine-tune text. The builder prevents layout-breaking changes while keeping iteration fast. This makes continuous improvement simple and safe.",
+      image: "/src/assets/SmarketingPics/LP.png",
     },
   ];
 
@@ -96,26 +126,27 @@ export default function PortfolioSection({
                   <div className="expBullets">
                     <div className="bulletRow">
                       <div className="bulletDot" />
-                      <div className="bulletText">Co-founded and built the product as part of a team of five entrepreneurs - from concept to a working platform.</div>
+                      <div className="bulletText">
+                        Co-founded and built the product as part of a team of five entrepreneurs - from concept to a working platform.
+                      </div>
                     </div>
                     <div className="bulletRow">
                       <div className="bulletDot" />
-                      <div className="bulletText">Took the venture beyond the college scope, improved it through iterations, and presented it in a sharks Tank investor TV pitch.</div>
+                      <div className="bulletText">
+                        Took the venture beyond the college scope, improved it through iterations, and presented it in a sharks Tank investor TV pitch.
+                      </div>
                     </div>
                     <div className="bulletRow">
                       <div className="bulletDot" />
-                      <div className="bulletText">Owned the landing page generator and delivered the UI/UX across the product with a strong focus on design, responsiveness, and performance.</div>
+                      <div className="bulletText">
+                        Owned the landing page generator and delivered the UI/UX across the product with a strong focus on design, responsiveness, and performance.
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="mutedTiny">
-                    Next: you can attach screenshots to the flow below and turn this into a full “system walkthrough” chain with visual steps.
                   </div>
                 </div>
 
                 <div className="expFlowCard" data-reveal>
                   <div className="flowTitle">How the system works</div>
-                  <div className="flowSub">A visual chain you can expand with screenshots - each step leads to the next.</div>
 
                   <div className="flowList">
                     {flowItems.map((it, idx) => (
@@ -133,7 +164,12 @@ export default function PortfolioSection({
                           <div className="flowBody">
                             <div className="flowImgWrap">
                               {it.image ? (
-                                <img className="flowImg" src={it.image} alt={it.title} />
+                                <img
+                                  className="flowImg clickable"
+                                  src={it.image}
+                                  alt={it.title}
+                                  onClick={() => setOpenImage(it.image!)}
+                                />
                               ) : (
                                 <div className="flowImgFallback">Add screenshot</div>
                               )}
@@ -145,10 +181,6 @@ export default function PortfolioSection({
                       </div>
                     ))}
                   </div>
-
-                  <div className="mutedTiny">
-                    When you’re ready, we’ll add image uploads per step and make the chain animated (scroll reveal + subtle connector motion).
-                  </div>
                 </div>
               </div>
             ) : null}
@@ -157,7 +189,6 @@ export default function PortfolioSection({
               <div>
                 <div className="skillsTop" data-reveal>
                   <div className="skillsTitle">Tech Stack</div>
-                  <div className="skillsSub">Logos are loaded automatically from src/assets/skills.</div>
                 </div>
 
                 <div className="skillsShowcase">
@@ -174,7 +205,6 @@ export default function PortfolioSection({
               <div>
                 <div className="projTopLine" data-reveal>
                   <div className="skillsTitle">Projects</div>
-                  <div className="skillsSub">Three projects. Click any card to open a full walkthrough popup.</div>
                 </div>
 
                 <div className="projGrid">
@@ -193,6 +223,17 @@ export default function PortfolioSection({
           </div>
         </div>
       </div>
+
+      {openImage && (
+        <div className="imageOverlay" onClick={() => setOpenImage(null)}>
+          <img
+            src={openImage}
+            alt="Preview"
+            className="imageOverlayImg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }
