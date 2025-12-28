@@ -53,15 +53,43 @@ export const INITIAL_PROJECTS: Project[] = [
   },
   {
     id: "p2",
-    name: "CVGo",
-    tech: "React, TypeScript, Node.js",
-    logo: undefined,
+    name: "Code Visualizer",
+    tech: "React, TypeScript",
+    logo: "/src/assets/Code-VisualizerProject/logo.png",
     githubUrl: "",
-    overview: "AI resume builder and job tracking concept: generate a CV and manage your pipeline in one place.",
+    overview:
+      "Interactive code visualizer for students: run code step-by-step and see what happens behind the scenes with variables, console output, recursion stack, and visual data structures.",
     steps: [
-      { title: "Profile and Inputs", text: "Explain what the user fills in.", image: undefined },
-      { title: "CV Generation", text: "Explain how the CV is generated.", image: undefined },
-      { title: "Job Tracking", text: "Explain the tracking flow.", image: undefined },
+      {
+        title: "Code Arsenal (ready examples)",
+        text:
+          "An arsenal of code snippets you can search and paste into the editor, then run and step through to understand what the code is doing behind the scenes.",
+        image: "/src/assets/Code-VisualizerProject/arsenal.png",
+      },
+      {
+        title: "Recursion Trace (call-by-call)",
+        text:
+          "Pick a recursive example and watch it call-by-call: see every function call, the current stack, where it enters, and what it returns.",
+        image: "/src/assets/Code-VisualizerProject/recursive.png",
+      },
+      {
+        title: "Visual Data Structures",
+        text:
+          "Visual examples of core data structures like Stack, Queue, BinaryTree, and Array, drawn on screen so the logic is easier to understand.",
+        image: "/src/assets/Code-VisualizerProject/tree.png",
+      },
+      {
+        title: "Step-by-step Execution",
+        text:
+          "Run and step through code to see variables change in real time and watch the console output update as the program executes.",
+        image: "/src/assets/Code-VisualizerProject/stack+code.png",
+      },
+      {
+        title: "Multiple Data Structures Together",
+        text:
+          "Supports multiple data structures in the same run and lets you view them together to understand how they interact in one program.",
+        image: "/src/assets/Code-VisualizerProject/multi-structures.png",
+      },
     ],
   },
   {
