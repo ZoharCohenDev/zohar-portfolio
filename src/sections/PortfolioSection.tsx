@@ -51,45 +51,42 @@ export default function PortfolioSection({
   }, [openImage]);
 
   const experienceIntro =
-    "I worked as a Full Stack Developer at Smarketing, a venture founded by five entrepreneurs as part of a college project that we decided to take all the way to a real product.\n\n" +
-    "We didn’t treat it like a “demo” - we built an end to end marketing platform focused on helping businesses create campaigns and generate high-converting landing pages quickly. As the product matured, we pushed it forward beyond the academic scope, validated the direction with real feedback, and presented the venture on an investor TV show (sharks Tank) as part of our funding and growth efforts.\n\n" +
-    "My role was hands on across the entire stack. I owned the generic landing page generator from start to finish - the data structure, the UI experience, and the logic that turns campaign/business inputs into a complete landing page. In addition, I was responsible for building and polishing the website pages, the overall UI/UX, responsiveness, and the design system that keeps everything consistent and professional.";
+    "Smarketing - Full Stack Developer - Final Project\n\n" +
+    "End to end marketing automation platform for creating, managing, and optimizing digital campaigns.\n\n" +
+    "Led system design and full development from concept to a production ready platform.\n\n" +
+    "Selected for a competitive entrepreneurship program and presented on the Shark Tank TV show as the only team representing the college.\n\n" +
+    "Tech: React, TypeScript, Node.js, Express, MongoDB.";
+
 
   const flowItems: ExperienceFlowItem[] = [
     {
       title: "Product landing page",
-      text:
-        "The journey starts with a public marketing landing page that introduces Smarketing as a product. It explains the value, shows the core capabilities, and drives users to sign up. This page was designed to convert visitors into active users.",
+      text:"",
       image: landingPageImg,
     },
     {
       title: "Campaign & business inputs",
-      text:
-        "After signing up, users define their campaign goals, target audience, and business details. These inputs are structured and validated to serve as the foundation for all generated content. Every later decision in the system is based on this data.",
+      text:"",
       image: registerImg,
     },
     {
       title: "Content generation & tone control",
-      text:
-        "Based on the campaign purpose and selected marketing tone, the system generates copy for each landing page section. Users can tweak wording, regenerate content, and adjust tone without breaking structure. This keeps content flexible but controlled.",
+      text:"",
       image: createCampaignImg,
     },
     {
       title: "Layout templates & design system",
-      text:
-        "Generated content is mapped into responsive layout templates built on a shared design system. Colors, typography, spacing, and components stay consistent across pages. This allows fast generation without sacrificing visual quality.",
+      text:"",
       image: buildLPImg,
     },
     {
       title: "Landing page analytics",
-      text:
-        "Once the landing page is live, the system tracks performance and engagement metrics. These insights help users understand how their campaign performs and where improvements are needed. Analytics close the loop between content and results.",
+      text:"",
       image: analyticsImg,
     },
     {
       title: "Preview, edit, and iterate",
-      text:
-        "Users can preview the full landing page, reorder sections, replace images, and fine-tune text. The builder prevents layout-breaking changes while keeping iteration fast. This makes continuous improvement simple and safe.",
+      text:"",
       image: lpImg,
     },
   ];
@@ -100,9 +97,6 @@ export default function PortfolioSection({
         <div className="sectionHead" data-reveal>
           <div className="kicker">Portfolio</div>
           <h2 className="titleBig">Portfolio Showcase</h2>
-          <p className="subText">
-            Explore my journey through projects, experience, and technical expertise. Each section represents a milestone in my continuous learning path.
-          </p>
         </div>
 
         <TabSwitch active={activeTab} onChange={onChangeTab} />
